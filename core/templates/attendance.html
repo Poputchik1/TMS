@@ -1,0 +1,56 @@
+{% extends 'layout.html' %} {% block body %}
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">in time</th>
+            <th scope="col">out time</th>
+            <th scope="col">total time</th>
+            <th scope="col">status</th>
+            <th scope="col">action</th>
+        </tr>
+    </thead>
+
+
+
+
+
+    {% for user in users %}
+    <tbody>
+        <tr>
+            <th scope="row">{{user.id}}</th>
+            <td>{{ user.fullname }}</td>
+            <td>{{ user.in_time }}</td>
+            <td>{{ user.out_time }}</td>
+            <td>{{ user.total_duration }}</td>
+            <td>{{ user.status }}</td>
+            <td>
+
+                <form action="">
+                    <input type="submit">
+
+
+                </form>
+
+            </td>
+
+
+
+        </tr>
+
+
+
+        {% endfor %}
+
+
+
+    </tbody>
+</table>
+
+
+
+
+{% endblock %}
