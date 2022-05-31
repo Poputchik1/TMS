@@ -1,3 +1,4 @@
+from datetime import datetime
 from django.db import models
 
 
@@ -12,12 +13,18 @@ class user(models.Model):
     temp_password = models.CharField(max_length=255)
     isadmin = models.BooleanField(default=False)
 
+    def __str__(self):
+        return f"{self.username}"
+
 
 class attendance_info(models.Model):
     userAtendance = models.ForeignKey(user, on_delete=models.CASCADE)
-    in_time = models.DateTimeField()
-    out_time = models.DateTimeField()
-    total_duration = models.IntegerField()
+    in_time = models.DateTimeField(default=datetime.now())
+    out_time = models.DateTimeField(blank=True, null=True)
+    total_duration = models.IntegerField(blank=True, null=True)
+
+    def __str__(self):
+        return f"{self.userAtendance}"
 
 
 class task(models.Model):
@@ -26,4 +33,7 @@ class task(models.Model):
     start_time = models.DateTimeField()
     end_time = models.DateTimeField()
     user_id = models.ForeignKey(user, on_delete=models.CASCADE)
-    status = models.BooleanField(default=False)
+    status = models.IntegerField(default=0)
+
+    def __str__(self):
+        return f"{self.title}"
