@@ -1,0 +1,75 @@
+{% extends 'layout.html' %} {% block body %}
+
+<form action="{% url 'update' %}" method="post">
+  {% csrf_token %}
+  <input type="hidden" name="task_id" value="{{ task.id }}" />
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Task Title</label>
+    <input
+      disabled
+      value="{{ task.title }}"
+      name="fullName"
+      type="text"
+      class="form-control"
+      id="exampleInputEmail1"
+    />
+  </div>
+
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">description</label>
+    <input
+      value="{{ task.description }}"
+      name="description"
+      type="text"
+      class="form-control"
+      id="example"
+      type="text"
+      class="form-control"
+      id="exampleInputEmail1"
+      aria-describedby="emailHelp"
+    />
+  </div>
+
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">start time</label>
+    <input
+      disabled
+      value="{{ task.start_time }}"
+      name="start_time"
+      type="text"
+      class="form-control"
+      id="example"
+      type="text"
+      class="form-control"
+      id="exampleInputEmail1"
+      aria-describedby="emailHelp"
+    />
+  </div>
+
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">end time</label>
+    <input
+      disabled
+      value="{{ task.end_time }}"
+      name="end_time"
+      type="text"
+      class="form-control"
+      id="example"
+      type="text"
+      class="form-control"
+      id="exampleInputEmail1"
+      aria-describedby="emailHelp"
+    />
+  </div>
+
+  <select name="status" class="form-select" aria-label="Default select example">
+    <option>Status</option>
+    <option value="0">incompleate</option>
+    <option value="1">in progress</option>
+    <option value="2">compleate</option>
+  </select>
+
+  <button type="submit" class="btn btn-primary">Update</button>
+</form>
+
+{% endblock %}

@@ -1,10 +1,9 @@
 {% extends 'layout.html' %} {% block body %}
 
-<div class="d-grid gap-2 d-md-block">
-  <a href="addUser" class="btn btn-primary"> Add New User</a>
-  <a href="addTask" class="btn btn-primary"> Add New Task</a>
-</div>
 
+  <a href="{% url 'addTask' %}" class="btn btn-primary"> Add New Task</a>
+
+</div>
 <table class="table">
   <thead>
     <tr>
@@ -24,6 +23,7 @@
       <th scope="row">{{task.id}}</th>
       <td>{{ task.title }}</td>
       <td>{{ task.user_id.fullname }}</td>
+
       <td>{{ task.start_time }}</td>
       <td>{{ task.end_time }}</td>
 
@@ -40,9 +40,29 @@
       {% endif %}
 
       <td>
-        <form action="">
-          <input type="submit" />
+        <form action="{% url 'deletetask' %}" method="POST">
+          {% csrf_token %}
+          <input type="hidden" name="next" value="{{ request.path }}" />
+          <button type="submit" name="task" value="{{ task.id }}">
+            Delete
+          </button>
         </form>
+
+
+        <form action="{% url 'taskview' task.id  %}" method="POST">
+          {% csrf_token %}
+
+
+        <button type="submit" name="task" value="{{ task.id }}">
+          edit
+        </button>
+
+
+      </form>
+
+
+
+
       </td>
     </tr>
 

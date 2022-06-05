@@ -1,0 +1,32 @@
+{% extends 'layout.html' %} {% block body%}
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Employee ID</th>
+      <th scope="col">Employee Name</th>
+      <th scope="col">Join date</th>
+      <th scope="col">Jobs accepted</th>
+      <th scope="col">Jobs Finnshed</th>
+      <th scope="col">Date Of Report</th>
+      <th scope="col">Details</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for report in reports%}
+
+    <tr>
+      <th scope="row">{{ report.user.id }}</th>
+      <td>{{ report.user.fullname }}</td>
+      <td>{{ report.user.date_joined }}</td>
+      <td></td>
+      <td></td>
+      <td>{{ report.filed }}</td>
+      <td></td>
+    </tr>
+
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}

@@ -13,8 +13,27 @@
 </head>
 
 <body>
+    {% if user.is_superuser is False %}
 
-    {% block body %} {% endblock %}
+    <div class="d-grid gap-2 d-md-block">
+        <a href="{% url 'addUser' %}" class="btn btn-primary"> Add New User</a>
+        
+        <a href="{% url 'signout' %}" class="btn btn-primary"> signout </a>
+{% else %}
+<a href="{% url 'signout' %}" class="btn btn-primary"> signout </a>
+
+{% endif %}
+
+    {% block body %} 
+    
+    
+    
+    
+    
+    
+    
+    
+    {% endblock %}
 
 </body>
 

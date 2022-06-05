@@ -6,3 +6,4 @@ from .models import *
 admin.site.register(user)
 admin.site.register(task)
 admin.site.register(attendance_info)
+admin.site.register(report)
