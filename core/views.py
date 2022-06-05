@@ -20,10 +20,19 @@ def index(request):
 @login_required(login_url='signin')
 def addUser(request):
     if request.method == "POST":
+        # feilds belonging to user model
         fullname = request.POST.get("fullName")
         username = request.POST.get("username")
         email = request.POST.get("email")
         password = request.POST.get("password")
+        # feilds belonging to profile of that user
+        age = request.POST.get("age")
+        marital_status = request.POST.get("marital_status")
+        job_title = request.POST.get("job_title")
+        joining_date = request.POST.get("joining_date")
+        department = request.POST.get("department")
+        contract_type = request.POST.get("contract_type")
+        internal_company_level = request.POST.get("internal_company_level")
 
         if user.objects.filter(username=username).exists():
             messages.info(request, 'Username is taken')
@@ -51,6 +60,13 @@ def addUser(request):
             atuser.att = new
 
             atuser.save(update_fields=['att'])
+
+            newProfile = profile.objects.create(
+                user=atuser,
+                age=age, marital_status=marital_status, joining_date=joining_date, job_title=job_title, department=department, contract_type=contract_type, internal_company_level=internal_company_level
+            )
+
+            newProfile.save()
 
             print("user was added successfully")
             return redirect('index')
@@ -136,6 +152,7 @@ def deletetask(request):
         return redirect(next)
 
 
+@login_required(login_url='signin')
 def administration(request):
     users = user.objects.all()
     return render(request, "administration.html", {
@@ -143,6 +160,7 @@ def administration(request):
     })
 
 
+@login_required(login_url='signin')
 def userview(request, user_id):
     viewUser = user.objects.get(id=user_id)
     return render(request, "userview.html", {
@@ -150,6 +168,7 @@ def userview(request, user_id):
     })
 
 
+@login_required(login_url='signin')
 def taskview(request, task_id):
     viewtask = task.objects.get(id=task_id)
     return render(request, "taskview.html", {
@@ -157,6 +176,7 @@ def taskview(request, task_id):
     })
 
 
+@login_required(login_url='signin')
 def reports(request):
     if request.method == "POST":
 
@@ -176,12 +196,14 @@ def reports(request):
         })
 
 
+@login_required(login_url='signin')
 def history(request):
     return render(request, "history.html", {
         'reports': report.objects.all
     })
 
 
+@login_required(login_url='signin')
 def update(request):
     task_id = request.POST.get("task_id")
     updatetask = task.objects.get(id=task_id)
