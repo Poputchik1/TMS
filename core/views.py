@@ -25,14 +25,6 @@ def addUser(request):
         username = request.POST.get("username")
         email = request.POST.get("email")
         password = request.POST.get("password")
-        # feilds belonging to profile of that user
-        age = request.POST.get("age")
-        marital_status = request.POST.get("marital_status")
-        job_title = request.POST.get("job_title")
-        joining_date = request.POST.get("joining_date")
-        department = request.POST.get("department")
-        contract_type = request.POST.get("contract_type")
-        internal_company_level = request.POST.get("internal_company_level")
 
         if user.objects.filter(username=username).exists():
             messages.info(request, 'Username is taken')
@@ -60,13 +52,6 @@ def addUser(request):
             atuser.att = new
 
             atuser.save(update_fields=['att'])
-
-            newProfile = profile.objects.create(
-                user=atuser,
-                age=age, marital_status=marital_status, joining_date=joining_date, job_title=job_title, department=department, contract_type=contract_type, internal_company_level=internal_company_level
-            )
-
-            newProfile.save()
 
             print("user was added successfully")
             return redirect('index')
